@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block main %}{% endblock main %}
+    {% block section %}
+    <div class="col-6" style="float:left;">
+        <canvas id="myChart" style="background-color: rgb(0, 29, 49);"></canvas>
+        <br><br>    
+        <canvas id="myChart2" style="background-color: rgb(0, 29, 49);" ></canvas>
+    </div>
+    <div class="col-6" style="float:left;">
+        <table class="table" style="color: white; background-color: rgb(0, 29, 49);text-align: center;height: 100px;">
+        <tr><th><strong>Total count :</strong></th></tr>
+        <br>
+        <tr>
+        <td><strong>254</strong></td>
+        </tr>
+        </table>
+        <table class="table" style="color: aliceblue;">
+            <thead>
+                
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">candidate</th>
+                <th scope="col">experience</th>
+                <th scope="col">date of submission</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for applie in applies %}
+                
+                <th scope="row">{{ for.counter }}</th>
+                <td><a href="" style="color: aliceblue;">{{applie.FullName}}</a></td>
+                <td>{{applie.experience}} years</td>
+                <td>{{ applie.date_created }}</td>
+            </tr>
+                
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endblock section %}
+
+</body>
+</html>

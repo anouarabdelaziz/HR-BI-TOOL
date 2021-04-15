@@ -1,0 +1,66 @@
+{% extends 'home.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block main %}{% endblock main %}
+    {% block section %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+    <div class="col-6" style="align-items: center; display: inline;">
+        <table class="table table-item" style="background-color: rgb(30, 28, 49);color: whitesmoke;">
+            <tr>
+                <th scope="col"> <strong><h2 style="color: whitesmoke;"> position </h2></strong></th>
+                <th scope="col"> <strong><h2 style="color: whitesmoke;"> skills </h2></strong></th>
+            </tr>
+            <hr>
+            <tbody>
+
+                {% for job in jobs  %}
+                <tr class="our-row">
+                <td scope="row" ><p>{{ job }}</p></td>
+                <td scope="row" >
+                    {% for skill in job.comp_set.all %}
+                      <p>{{skill.name}}</p>
+                     {% endfor %}
+                
+                </td>
+                <td scope="row" ><button class="btn btn-outline-secondary btn-sm" ><a href="{% url 'skills' job.id %}" style="color: rgb(243, 243, 255);">Add skills</a></button></dt>
+                </tr>   
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+     <div class="col-6" style="display: block;
+         margin-left: auto;
+         margin-right: auto;
+         width: 40%;">
+         <h2 style="color: whitesmoke;">Add an offer</h2>
+            <form action='', method="POST" style="background-color: rgb(30, 28, 49);">
+                {% csrf_token %}
+                <p style="color:whitesmoke;">Name : </p>
+                {{ form.name }}
+                <p style="color:whitesmoke;">Description : </p>
+                {{ form.Description }}
+                <button class="btn btn-info btn-lg btn-block">submit</button>   
+            </form>   
+        </div>
+       
+            <!-- <h1>skills : </h1>
+            <form action='', method="POST">
+                {% csrf_token %}
+                {{ form_1 }}
+                <button class="btn btn-secondary">submit</button>
+                
+            </form> -->
+  
+      
+    {% endblock section %}
+
+</body>
+</html>

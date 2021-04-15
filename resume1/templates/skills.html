@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% block main %}{% endblock main %}
+    {% block section %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+    <div class="form-group" style="display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;color: rgb(41, 29, 61);">
+    <form action='', method="POST">
+            {% csrf_token %}
+                <p>{{ form.name.label }} : </p>
+                {{ form.name }}
+                <p>{{ form.importance.label }} : </p>
+                <div class="container" style="text-align: center;" >
+                <ul>
+                    {% for choice in form.importance.field.choices %}
+                        <label for="">{{choice.0}}</label>
+                        <input type="radio" name="importance" value="{{choice.1}}"
+                        {% ifequal form.importance.data choice.1 %} 
+                            checked="checked"
+                        {% endifequal %}/>
+                    {% endfor %}
+                </ul> </div>
+                <button class="btn btn-outline-secondary btn-lg btn-block">submit</button>
+        </form> 
+    </div>
+    {% endblock section %}
+    
+</body>
+</html>

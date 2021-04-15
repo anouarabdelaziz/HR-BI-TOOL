@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+        <title>Document</title>
+    </head>
+    <body>
+         <div class="container" style="display: contents;" >
+            <input type='checkbox' id="check">
+            <label for="check">
+                <i class="fas fa-bars" id="btn"></i>
+                <i class="fas fa-times" id="cancel"></i>
+            </label>
+            <div class="sidebar">
+                <header><strong>recruit</strong></header>
+                <ul>
+                    <li><a href="{% url 'home' %}"><i class="fas fa-stream"></i>Dashboard</a></li>
+                    <li><a href="{% url 'consult' %}"><i class="fas fa-stream"></i>consult</a></li>
+                    <li><a href="{% url 'recruit' %}"><i class="fas fa-sliders-h"></i>Recruit</a></li>
+                    <li><a href="{% url 'submit' %}"><i class="fas fa-sliders-h"></i>Apply</a></li>
+                    <li><a href="#"><i class="fas fa-qrcode"></i>exit</a></li>
+                </ul>
+            </div>
+               
+            <section style="transition:all .5s ease;display: flex;">
+                {% block section %}
+                {% block main %}
+
+              
+                    <div class="col-6" style="float:left;">
+                        <table class="table" style="color: white; background-color: rgb(0, 29, 49);;text-align: center;height: 100px;">
+                            <tr><th style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><strong>TOTAL COUNT </strong></th></tr>
+                            <br>
+                            <tr>
+                            <td><strong>20</strong></td>
+                            </tr>
+                            </table>
+                        <br><br>    
+                        <canvas id="myChart2" style="background-color: rgb(30, 28, 49);border-radius: 5px;" ></canvas>
+                    </div>
+                    <div class="col-6" style="float:left;">
+                        <br>
+                        <table class="table table-sm" style="color: aliceblue;">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">offer</th>
+                                <th scope="col">number of candidates</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>data science senior position</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>web dev junior position</td>
+                                <td>8</td>
+                            </tr>
+                  
+                            </tbody>
+                        </table>
+
+                        <br><br>
+                        <canvas id="myChart" style="background-color: rgb(30, 28, 49); border-radius: 5px;"></canvas>
+                        
+                        </div>
+                {% endblock main %}
+                {% endblock section %}
+             </section>
+
+             </div>
+             <br><br>
+            
+            </div>
+            
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'doughnut',
+
+                // The data for our dataset
+                data: {
+                    labels: {{ cnt|safe }},
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: ['red','blue','green', 'yellow','#6699ff','#ff66ff', '#ccffe6'],
+                        borderColor: 'rgb(248,144,32)',
+                        data: [3, 10, 5, 2, 20, 30, 45]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+        
+
+        </script>
+        <script>
+             var ctx = document.getElementById('myChart2').getContext('2d');
+             
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: {{ data_date|safe }},
+                    datasets: [{
+                        label: 'My First dataset',
+                        backgroundColor: '#ff0066',
+                        borderColor: '#ffcce0',
+                        data: [0, 10, 5, 2, 20, 30, 45]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+        </script>
+
+     </body>
+</html>

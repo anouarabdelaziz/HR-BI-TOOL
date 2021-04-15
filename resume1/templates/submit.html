@@ -1,0 +1,64 @@
+
+{% extends 'home.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    {% block main %}{% endblock main %}
+    {% block section %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/submit.css' %}">
+    <div class="container" style="content: center;">
+    <div class="testbox">
+    <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+            <h1>Submit your application here : </h1>
+        <div class="item">
+          <p>Your name</p>
+          <div>
+            <p></p>  {{ form.FullName }}
+          </div>
+        </div>
+          <div class="item">
+            <p>exprience : </p>
+            <div>
+                {{ form.experience }}
+                {{ form.experience.choices }}
+                {% for value in form.experience.field.choices %}
+                      {{ value }}
+                {% endfor %}
+            </div>
+          </div>
+          <div class="item">
+            <p>Your Cv :</p>
+            <div>
+
+              {{ form.Cv }}
+            </div>
+          </div>
+        <!-- <div class="item">
+          <p>Your email</p>
+          <input type="text" name="name"/>
+        </div> -->
+        <!-- <div class="item">
+          <p>Date of complaint</p>
+          <input type="date" name="name" required/>
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+      -->
+        <div class="btn-block">
+          <button type="submit" href="/">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+    {% endblock section %}
+
+</body>
+</html>
